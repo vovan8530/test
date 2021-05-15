@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,15 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+# TODO: #### TASKS ####
+
+Route::group(['middleware' => 'auth'], function () {
+
+  Route::resource('tasks', TaskController::class);
+  Route::get('/taskDone/{task}', [TaskController::class, 'taskDone'])->name('taskDone');
+
+});
+
+# TODO: #### TASKS ####
 
 require __DIR__.'/auth.php';
