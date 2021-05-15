@@ -4,10 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
+use App\Services\Actions\TaskServiceAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class TaskController extends Controller {
+  /**
+   * @var TaskServiceAction
+   */
+  protected $service;
+
+  /**
+   * TaskController constructor.
+   *
+   * @param TaskServiceAction $service
+   */
+  public function __construct(TaskServiceAction $service) {
+    $this->service = $service;
+  }
+
   /**
    * @return View
    */
@@ -41,8 +56,8 @@ class TaskController extends Controller {
    * @param Task $task
    * @return RedirectResponse
    */
-  public function taskDone(Task $task): RedirectResponse{
-    $task->taskCompleted()->save();
+  public function taskDone(Task $task): RedirectResponse {
+    $this->service->saveTask($task);
     return redirect()->route('tasks.index');
   }
 }
