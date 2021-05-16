@@ -15,6 +15,25 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <!-- Pusher -->
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+        <script>
+
+          // Enable pusher logging - don't include this in production
+          // Pusher.logToConsole = true;
+
+          var pusher = new Pusher('6869444594c40f6c595d', {
+            cluster: 'eu'
+          });
+
+          var channel = pusher.subscribe('my-channel');
+          channel.bind('my-event', function() {
+            document.location.reload();
+          });
+        </script>
+        <!-- Pusher -->
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

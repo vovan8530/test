@@ -4,6 +4,7 @@
 namespace App\Services\Actions;
 
 
+use App\Events\TaskChangeEvent;
 use App\Events\TaskDone;
 use App\Models\Task;
 
@@ -16,6 +17,7 @@ class TaskServiceAction {
     $task->taskCompleted()->save();
 
     event(new TaskDone($task));
+    event(new TaskChangeEvent());
 
     return $this;
   }

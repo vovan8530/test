@@ -22,6 +22,7 @@ class EventServiceProvider extends ServiceProvider {
     TaskDone::class => [
       NotifyAdminTaskDone::class,
     ],
+
   ];
 
   /**

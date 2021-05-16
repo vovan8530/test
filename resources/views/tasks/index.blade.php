@@ -23,14 +23,18 @@
           <tr class="border-b hover:bg-orange-100 bg-gray-100">
           <td class="p-3 px-5">{{$loop->index + 1}}</td>
           <td  class="p-3 px-5  @if(!$task->is_active) text-decoration: line-through @endif">{{$task->description}}</td>
-          <td class="p-3 px-5 flex justify-end">
+          <td class="p-3 px-5">
             @if($task->is_active)
-            <button onclick="window.location='{{route('taskDone', ['task' => $task])}}'" type="button" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Сделано</button>
+            <td class="flex justify-end">
+                <button onclick="window.location='{{route('taskDone', ['task' => $task])}}'" type="button" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Сделано</button>
+            </td>
             @else()
               <form action="{{route('tasks.destroy', ['task' => $task])}}" method="POST">
                 @method('DELETE')
                 @csrf
-              <button type="submit" class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Удалить</button>
+              <td  class=" px-4 flex justify-end">
+                <button type="submit" class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Удалить</button>
+              </td>
               </form>
             @endif
           </td>
@@ -62,7 +66,7 @@
       <div class="md:w-1/3"></div>
       <div class="md:w-2/3">
         <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
-          Создать
+          Добавить
         </button>
       </div>
         </div>
